@@ -31,3 +31,4 @@ node createQueue.js 216 Ilde C:/melee-clip-queue true true
 - onHit: true/false value depending if you want that the animation hits/whiffs. For animations that this parameter doesn't make sense (like walking) this parameter is ignored
 - animationPlayerSelf: true/false value if you want to search for the playerDisplayName animation or his opponents. The idea is that maybe you want to know what you are doing after getting grabbed, so in that case you would use this parameter as true.
 
+After running it succesfully, a .json file called `output.json` should be in the folder, that can be loaded to clippi to replay the moments it found.
