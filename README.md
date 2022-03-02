@@ -25,10 +25,14 @@ node createQueue.js animationState playerDisplayName pathToReplays onHit animati
 // Actual example
 node createQueue.js 216 Ilde C:/melee-clip-queue true true
 ```
-- animationState: Number of the animation you're looking to get clipped. It is based on the list put together by Dan Salvato and other contributors [here](https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8/preview#gid=13). Some animations are wrong though, the ones about special moves at least. In the example, 216 corresponds to catchWait (a succesful grab)
-- playerDisplayName: Displayed name in the slippi game, not the connnect code
-- pathToReplays: Full path to folder of the project. Probably a bad idea but for now it works, the json output needs to have the full path to the replays so the queue of clips works properly on clippi
-- onHit: true/false value depending if you want that the animation hits/whiffs. For animations that this parameter doesn't make sense (like walking) this parameter is ignored
-- animationPlayerSelf: true/false value if you want to search for the playerDisplayName animation or his opponents. The idea is that maybe you want to know what you are doing after getting grabbed, so in that case you would use this parameter as true.
+- **animationState**: Number of the animation you're looking to get clipped. It is based on the list put together by Dan Salvato and other contributors [here](https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8/preview#gid=13). Some animations are wrong though, the ones about special moves at least. In the example, 216 corresponds to catchWait (a succesful grab)
+
+- **playerDisplayName**: Displayed name in the slippi game, not the connnect code
+
+- **pathToReplays**: Full path to folder of the project. Probably a bad idea but for now it works, the json output needs to have the full path to the replays so the queue of clips works properly on clippi
+
+- **onHit**: true/false value depending if you want that the animation hits/whiffs. For animations that this parameter doesn't make sense (like walking) this parameter is ignored
+
+- **animationPlayerSelf**: true/false value if you want to search for the playerDisplayName animation or his opponents. The idea is that maybe you want to know what you are doing after getting grabbed, so in that case you would use this parameter as true.
 
 After running it succesfully, a .json file called `output.json` should be in the folder, that can be loaded to clippi to replay the moments it found.
