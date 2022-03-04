@@ -1,6 +1,6 @@
 # melee-clip-queue
 
-Work in progress quick way to filter [smash brothers melee](https://en.wikipedia.org/wiki/Super_Smash_Bros._Melee) .slp replays by animations and make a queue of clips that you can play on [clippi](https://github.com/vinceau/project-clippi). Meant as a way to learn exactly how much you are sucking in different in-game situations such as: follow ups on grabs/hits, when are you missing techs, etc. **Disclaimer**: project done to learn some js to understand whats going on in the whole Slippi ecosystem eventually. 
+Work in progress quick way to filter [smash brothers melee](https://en.wikipedia.org/wiki/Super_Smash_Bros._Melee) .slp replays by animations and make a queue of clips that you can play on [clippi](https://github.com/vinceau/project-clippi). Meant as a way to learn exactly how much you are sucking in different in-game situations such as: follow ups on grabs/hits, when are you missing techs, etc. Blog post [here](https://rrrventures.wordpress.com/2022/03/04/filtering-ssbm-slippi-replays-to-maybe-suck-less/). **Disclaimer**: project done to learn some js to understand whats going on in the whole Slippi ecosystem eventually. 
 
 
 ## Requirements 
@@ -31,7 +31,7 @@ node createQueue.js 216 Ilde C:/melee-clip-queue true true
 
 - **pathToReplays**: Full path to folder of the project. Probably a bad idea but for now it works, the json output needs to have the full path to the replays so the queue of clips works properly on clippi
 
-- **onHit**: true/false value depending if you want that the animation hits/whiffs. For animations that this parameter doesn't make sense (like walking) this parameter is ignored
+- **onHit**: true/false value depending if you want that the animation hits/whiffs. For animations that can't actually damage this parameter doesn't make sense (like walking) so it is ignored
 
 - **animationPlayerSelf**: true/false value if you want to search for the playerDisplayName animation or his opponents. The idea is that maybe you want to know what you are doing after getting grabbed, so in that case you would use this parameter as true.
 
