@@ -23,7 +23,7 @@ const movesThatHit = {
 // 360 upb after puff
 
 
-function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, animationPlayerSelf = true){
+function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = 'false', animationPlayerSelf = 'true'){
 
 	// Parameters of search
 	connectCodeId = 'ILDE#538'; // Not used yet
@@ -31,8 +31,8 @@ function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, a
 	stageId = 'any';      // Not used yet
 	characterId = 'any';  // Not used yet
 	stateId = idYouWant;  // Wiki of ids at: https://docs.google.com/spreadsheets/d/1JX2w-r2fuvWuNgGb6D3Cs4wHQKLFegZe2jhbBuIhCG8/preview#gid=13
-	hit = onHit;          // Some animations actually make sense to have this in case you want to filter hits/whiffs
-
+	hit = onHit === 'true';          // Some animations actually make sense to have this in case you want to filter hits/whiffs
+	animationPlayerSelf = animationPlayerSelf === 'true'
 
 	
 	const { SlippiGame } = require("@slippi/slippi-js");
@@ -58,6 +58,7 @@ function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, a
 	  return lf.frame;
 	}
 
+	
 
 	// The idea here is to clip all the grabs that happened
 	momentCount = 0
@@ -71,16 +72,22 @@ function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, a
 	  lastframe = GetLastFrame(game);
 	  metadata = game.getMetadata();
 
+
+	  // Get proper player index because maybe you're not in the same port in all the replays
+	  // If you choose animationPlayerSelf to be false, the index should switch
+	  if (animationPlayerSelf){
+		playerIndex = settings.players.findIndex(x => x.displayName === displayNameId); 
+		oponnentIndex = Math.abs(playerIndex - 1)
+	  } else {
+	  	oponnentIndex = settings.players.findIndex(x => x.displayName === displayNameId); 
+		playerIndex = Math.abs(oponnentIndex - 1)
+	  }
+
 	  // This because maybe you used an animation that couldn't actually hit (landing, walking, waiting, etc.), so small check
 	  moveThatHits = Object.values(movesThatHit).includes(stateId);
 	  if (!movesThatHit){
-	  	onHit = false; 
+	  	hit = false; 
 	  }
-
-	  // Get proper player index because maybe you're not in the same port in all the replays
-	  playerIndex = settings.players.findIndex(x => x.displayName === displayNameId); 
-	  oponnentIndex = Math.abs(playerIndex - 1)
-
 
 	  // Loop through frames and create a list of frames in the game where the action happened
 	  stateFrame = {}; 
@@ -95,7 +102,7 @@ function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, a
 	  	statePost = post.actionStateId;
 
 	  	
-	  	if (!onHit) {
+	  	if (!hit) {
 		  	if (statePre == stateId && (n > (lastState + 50))) {
 		  		stateFrame['actionID' + n + playerIndex] = pre.frame;
 		  		lastState = n;
@@ -140,6 +147,6 @@ function createQueue(idYouWant, playerYouWant, path_to_replays, onHit = false, a
 
 
 
-createQueue(process.argv[2], process.argv[3], process.argv[4], process.argv[5]);
+createQueue(process.argv[2], process.argv[3], process.argv[4], process.argv[5], process.argv[6]);
 
 
